@@ -7,7 +7,7 @@
     "start": "node server/server.js",
     "app": "nodemon server/server.js",
     "server": "nodemon server.js -e js,hbs",
-    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha tests/*.test.js",
+    "test": "mocha test/*.test.js",
     "test2watch": "nodemon --exec  \"npm test\""
   },
   "engines": {
