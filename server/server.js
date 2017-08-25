@@ -4,7 +4,7 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const socketIO = require('socket.io');
-const { generateMessage } = require('./utils/message');
+const { generateMessage, generateLocationMessage, generateLocationPre } = require('./utils/message');
 
 const port = process.env.PORT || 3000;
 const publicPath = path.join(__dirname, '../public/');
@@ -45,10 +45,15 @@ io.on("connection", socket => {
   callback('maintenant que c\'est recu, Ceci est du serveur va aller au client, comme arg, ca pourrait etre un obj de n importe quoi') //parfait, recu!
 });
 
-//recoit lat lng
+//recoit lat lng renvoie from, url, createdAt
+// socket.on('createLocationMessage', (coords) => {
+//  	io.emit('newLocationMessage', generateLocationMessage('admin', coords.latitude, coords.longitude));
+// });
+
+//test de direction pour par prefontaine
 socket.on('createLocationMessage', (coords) => {
- 	io.emit('newMessage', generateMessage('admin', `lat: ${coords.latitude} et lng ${coords.longitude}`))
-})
+ 	io.emit('newLocationMessage', generateLocationPre('admin', coords.latitude, coords.longitude));
+});
 
 
 	socket.on("disconnect", () => {

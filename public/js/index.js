@@ -19,18 +19,32 @@ socket.on("newMessage", function(message) {
 	document.querySelector("#messages").appendChild(li);
 });
 
-socket.emit(
-	"createMessage",{
-		from: "beubby",
-		text: "deuxieme emit"
-	},
-	function(data) {
-	//	console.log("parfait bobby, recu! ", data);
-	}
-);
+//truc qui revient de generateLocationMessage
+socket.on("newLocationMessage", function(obj) {
+	console.log("newLocationMessage", obj.url);
+	//va dans la console va displayer   socket.emit('newMessage' et socket.broadcast.emit('newMessage' de server
+
+	let li = document.createElement("li");
+  let lien = document.createElement("a");
+	li.innerHTML = `${obj.from}:`;
+  lien.href = `${obj.url}`;
+  lien.target = "_blank"
+  lien.innerHTML = ` Voir ma position : ${obj.url}`;
+	document.querySelector("#messages").appendChild(li).appendChild(lien);
+});
+
+// socket.emit(
+// 	"createMessage",{
+// 		from: "beubby",
+// 		text: "deuxieme emit"
+// 	},
+// 	function(data) {
+// 	//	console.log("parfait bobby, recu! ", data);
+// 	}
+// );
 
 
-
+//https://www.google.com/maps?q=lat,lng
 
 document.getElementById('message-form').addEventListener('submit', function (e){
     e.preventDefault();
@@ -44,13 +58,19 @@ document.getElementById('message-form').addEventListener('submit', function (e){
     }
 })
 
+//https://www.google.com/maps/dir/45.443500, -73.584139/Parc+Raymond-Préfontaine
 
 const locationButton = document.getElementById('location');
 locationButton.addEventListener('click', function (){
+  document.getElementById('patience').innerHTML = 'un instant svp calcul en cours...'
+  setTimeout(function (){
+     document.getElementById('patience').innerHTML = ' ';
+  },5000);
   if(!navigator.geolocation){
     return alert('La geolocalisation n\'est pas supporté par votre systeme')
   }
    navigator.geolocation.getCurrentPosition(function (position){
+
      socket.emit('createLocationMessage', {
        latitude: position.coords.latitude,
        longitude: position.coords.longitude

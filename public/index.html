@@ -6,22 +6,28 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Socket IO</title>
   <style>
-    html {background: rgb(74, 74, 74);color: white;font-family: Avenir;padding-left: 20px;}
+    html {background: rgb(20, 103, 41);color: white;font-family: Avenir;padding-left: 20px;}
+    li  {list-style: none; line-height: 1.8}
+    a {
+      list-style: none;
+      color: rgb(227, 165, 9)
+    }
+    input[name=message] { width: 300px; margin-bottom: 20px;}
   </style>
 </head>
 <body>
-  <h2>Bienvenue sur mon chat</h2>
+  <h2>Verdons Messenger</h2>
 
-  <ol id="messages">
+  <ul id="messages">
 
-  </ol>
+  </ul>
 
   <form id="message-form">
     <input type="text" name="message" placeholder="Votre message..."/>
     <button type="submit">Envoyer</button>
   </form>
   <button id="location">Envoyer Position</button>
-  
+  <p id="patience"></p>
   <script src="/socket.io/socket.io.js"></script>
 
   <script src="/js/libs/jquery.js"></script>
