@@ -29,7 +29,7 @@ socket.on("newLocationMessage", function(obj) {
 	li.innerHTML = `${obj.from}:`;
   lien.href = `${obj.url}`;
   lien.target = "_blank"
-  lien.innerHTML = ` Voir ma position : ${obj.url}`;
+  lien.innerHTML = ` Voir ma position`;
 	document.querySelector("#messages").appendChild(li).appendChild(lien);
 });
 
