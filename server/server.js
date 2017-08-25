@@ -33,17 +33,23 @@ io.on("connection", socket => {
 	);
 
 	  //FN QUI INTERCEPT LES SOCKET.ON('NIMPORTEQUOI' QUI VIENNENT DU CLIENT.
-  socket.on("createMessage", (message, callback) => {
+ socket.on("createMessage", (message, callback) => {
 		//OPERATION SERVEUR QUAND LE CLIENT EMIT UN NEWMESAGE DANS CE CAS
 		console.log("createMessage:", message.from); //envoi au terminal server.
 
-		io.emit("newMessage", generateMessage(message.from, message.text)); // pas un CB , on veut le retour, donc ()
+		 io.emit("newMessage", generateMessage(message.from, message.text)); // pas un CB , on veut le retour, donc ()
 
     //SI ON VOULAIT QUE LE MESSAGE SOIT QU AUX AUTRES.
   //socket.broadcast.emit("newMessage", generateMessage(message.from, message.text));
 
   callback('maintenant que c\'est recu, Ceci est du serveur va aller au client, comme arg, ca pourrait etre un obj de n importe quoi') //parfait, recu!
 });
+
+//recoit lat lng
+socket.on('createLocationMessage', (coords) => {
+ 	io.emit('newMessage', generateMessage('admin', `lat: ${coords.latitude} et lng ${coords.longitude}`))
+})
+
 
 	socket.on("disconnect", () => {
 		//SI ON CHANGE DE PAGE...//VERS SERVER

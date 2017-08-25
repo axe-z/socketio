@@ -21,11 +21,11 @@ socket.on("newMessage", function(message) {
 
 socket.emit(
 	"createMessage",{
-		from: "bobby",
+		from: "beubby",
 		text: "deuxieme emit"
 	},
 	function(data) {
-		console.log("parfait bobby, recu! ", data);
+	//	console.log("parfait bobby, recu! ", data);
 	}
 );
 
@@ -45,9 +45,17 @@ document.getElementById('message-form').addEventListener('submit', function (e){
 })
 
 
-// $('#message-form').on('submit', function (e){
-//    e.preventDefault();
-//  console.log($('.message').val() )
-//  console.log($(this).find('input').val() )
-//
-// })
+const locationButton = document.getElementById('location');
+locationButton.addEventListener('click', function (){
+  if(!navigator.geolocation){
+    return alert('La geolocalisation n\'est pas supporté par votre systeme')
+  }
+   navigator.geolocation.getCurrentPosition(function (position){
+     socket.emit('createLocationMessage', {
+       latitude: position.coords.latitude,
+       longitude: position.coords.longitude
+     })
+   }, function(){
+    alert('pas possible de savoir votre position en ce moment si vous n\'accepter pas la posibilité');
+   });
+})
