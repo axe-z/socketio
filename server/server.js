@@ -33,7 +33,7 @@ io.on("connection", socket => {
 	);
 
 	  //FN QUI INTERCEPT LES SOCKET.ON('NIMPORTEQUOI' QUI VIENNENT DU CLIENT.
-socket.on("createMessage", message => {
+  socket.on("createMessage", (message, callback) => {
 		//OPERATION SERVEUR QUAND LE CLIENT EMIT UN NEWMESAGE DANS CE CAS
 		console.log("createMessage:", message.from); //envoi au terminal server.
 
@@ -41,6 +41,8 @@ socket.on("createMessage", message => {
 
     //SI ON VOULAIT QUE LE MESSAGE SOIT QU AUX AUTRES.
   //socket.broadcast.emit("newMessage", generateMessage(message.from, message.text));
+
+  callback('maintenant que c\'est recu, Ceci est du serveur va aller au client, comme arg, ca pourrait etre un obj de n importe quoi') //parfait, recu!
 });
 
 	socket.on("disconnect", () => {
