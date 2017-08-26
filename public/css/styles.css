@@ -202,6 +202,11 @@ button:disabled {
   margin-bottom: 5px
 }
 
+
+a {
+  text-decoration: none;
+  color: rgba(51, 159, 13, 1);
+}
 .message__title h4 {
   font-weight: 600;
   margin-right: 10px
