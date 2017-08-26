@@ -43,8 +43,8 @@ button, button:hover {
 
 }
 .side_button {
-  margin: 0 auto;
-  width: 92%;
+  margin-right: 10px;
+  width: 230px;
   border-radius:  10px;
   text-align: center;
 }
@@ -206,6 +206,7 @@ button:disabled {
 a {
   text-decoration: none;
   color: rgba(51, 159, 13, 1);
+
 }
 .message__title h4 {
   font-weight: 600;
