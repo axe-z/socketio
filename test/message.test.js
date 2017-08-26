@@ -1,5 +1,5 @@
 const expect = require('expect');
- const {generateMessage} = require('./../server/utils/message.js');
+ const {generateMessage, generateLocationMessage} = require('./../server/utils/message.js');
 
 describe("Test de generateMessage", () => {
   it("Ca Devrait marcher", () => {
@@ -8,7 +8,17 @@ describe("Test de generateMessage", () => {
     const message = generateMessage(from, text)
 
      expect(message.createdAt).toBeA('number'); //fucking lowercase.
-     expect(message).toBeA('object');   //fucking lowercase. 
+     expect(message).toBeA('object');   //fucking lowercase.
      expect(message.from).toBe('ben');
+  });
+});
+
+
+describe("Test de generation de message", () => {
+  it("Ca Devrait donner un url", () => {
+    const message = generateLocationMessage("moi", 45, -73);
+
+    expect(message.createdAt).toBeA('number');
+    expect(message.url).toBe( `https://www.google.com/maps?q=45,-73`);
   });
 });

@@ -16,17 +16,17 @@ const generateLocationMessage = (from, lat, lng) => {
 
 
 //https://www.google.com/maps/dir/45.443500,-73.584139/Parc+Raymond-Préfontaine
-const generateLocationPre = (from, lat, lng) => {
-  return {
-    from,
-    url: `https://www.google.com/maps/dir/${lat},${lng}/Parc+Raymond-Préfontaine`,
-    createdAt: Date.now()
-  };
-};
+// const generateLocationPre = (from, lat, lng) => {
+//   return {
+//     from,
+//     url: `https://www.google.com/maps/dir/${lat},${lng}/Parc+Raymond-Préfontaine`,
+//     createdAt: Date.now()
+//   };
+// };
 
 
 module.exports = {
   generateMessage,
-  generateLocationMessage,
-  generateLocationPre
+  generateLocationMessage    //,
+//  generateLocationPre
 }

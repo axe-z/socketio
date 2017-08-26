@@ -33,15 +33,7 @@ socket.on("newLocationMessage", function(obj) {
 	document.querySelector("#messages").appendChild(li).appendChild(lien);
 });
 
-// socket.emit(
-// 	"createMessage",{
-// 		from: "beubby",
-// 		text: "deuxieme emit"
-// 	},
-// 	function(data) {
-// 	//	console.log("parfait bobby, recu! ", data);
-// 	}
-// );
+
 
 
 //https://www.google.com/maps?q=lat,lng
@@ -60,9 +52,9 @@ document.getElementById('message-form').addEventListener('submit', function (e){
 
 //https://www.google.com/maps/dir/45.443500, -73.584139/Parc+Raymond-Préfontaine
 
-const locationButton = document.getElementById('location');
+const locationButton = document.getElementById('send-location');
 locationButton.addEventListener('click', function (){
-  document.getElementById('patience').innerHTML = 'un instant svp calcul en cours...'
+  document.getElementById('patience').innerHTML = 'Calcul en cours, un moment...'
   setTimeout(function (){
      document.getElementById('patience').innerHTML = ' ';
   },5000);
