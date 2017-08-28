@@ -6,6 +6,7 @@ const generateMessage = (from, text) => {
   };
 };
 
+//https://www.google.com/maps?q=lat,lng
 const generateLocationMessage = (from, lat, lng) => {
   return {
     from,

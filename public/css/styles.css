@@ -170,7 +170,9 @@ button:disabled {
   flex-grow: 1;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  padding: 10px
+  padding: 10px;
+/*  background: rgb(47, 47, 47);
+  color:rgb(233, 233, 233)*/
 }
 
 .chat__footer {
