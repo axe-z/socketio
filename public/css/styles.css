@@ -49,6 +49,38 @@ button, button:hover {
   text-align: center;
 }
 
+.moment {
+  position: absolute;
+  right: 20px;
+  font-size: 80%;
+  color: rgba(123, 129, 119,.3);
+  transition: all 0.35s ease-in-out;
+  -webkit-transition: all 0.35s ease-in-out;
+}
+.moment:hover {
+    color: rgba(123, 129, 119,.9);
+    font-size: 83%;
+    transition: all 0.35s ease-in-out;
+    -webkit-transition: all 0.35s ease-in-out;
+}
+.text{
+  margin-left:  0px;
+  background: rgb(255, 255, 255);
+  cursor: default;
+  line-height: 1.5;
+  transition: all 0.35s ease-in-out;
+  -webkit-transition: all 0.35s ease-in-out;
+}
+.text:hover{
+  margin-left: 10px;
+}
+
+.text:nth-child(even){
+  transition: all 1.35s ease-in-out;
+  -webkit-transition: all 1.35s ease-in-out;
+  background: rgb(250, 250, 250);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -60,6 +92,7 @@ button, button:hover {
 
 li, ul {
   list-style-position: inside
+
 }
 
 h3 {
@@ -72,7 +105,9 @@ button {
   background: rgba(51, 159, 13, 1);
   cursor: pointer;
   border-radius: 5%;
-  transition: background .3s ease
+  transition: all 0.85s ease-in-out;
+  -webkit-transition: all 0.85s ease-in-out;
+  outline: none;
 }
 
 button:hover {
@@ -104,7 +139,8 @@ button:disabled {
   border-radius: 5px;
   padding: 0 20px;
   margin: 20px;
-  width: 230px
+  width: 230px;
+    outline: none;
 }
 
 .form-field {
@@ -210,6 +246,7 @@ a {
   color: rgba(51, 159, 13, 1);
 
 }
+
 .message__title h4 {
   font-weight: 600;
   margin-right: 10px

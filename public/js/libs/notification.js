@@ -5,7 +5,7 @@
   else if (Notification.permission === "granted") {
         var options = {
                 body: "Il y aura le user",
-                icon: "icon.png",
+                icon: "./css/icon.png",
                 dir : "ltr"
              };
           var notification = new Notification(message,options);
@@ -19,7 +19,7 @@
       if (permission === "granted") {
         var options = {
               body: "Il y aura le user",
-              icon: "icon.png",
+              icon: "./css/icon.png",
               dir : "ltr"
           };
         var notification = new Notification(message,options);

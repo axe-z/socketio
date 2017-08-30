@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const socketIO = require('socket.io');
+const moment = require('moment');
 const { generateMessage, generateLocationMessage/*, generateLocationPre*/ } = require('./utils/message');
 const port = process.env.PORT || 3000;
 const publicPath = path.join(__dirname, '../public/');
@@ -33,13 +34,13 @@ io.on("connection", socket => {
 
 
 /************************************ accepte createMessage ************************************/
-//FN QUI INTERCEPT LES SOCKET.ON('NIMPORTEQUOI' QUI VIENNENT DU CLIENT.
+//FN QUI INTERCEPT LES SOCKET.EMIT('CREATEMESSAGE' QUI VIENNENT DU CLIENT.
  socket.on("createMessage", (message, callback) => {
 		//OPERATION SERVEUR QUAND LE CLIENT EMIT UN NEWMESAGE DANS CE CAS
 		console.log(`createMessage: ${message.from}`, message.text); //envoi au terminal server.
 
 		// pas un CB , on veut le retour, donc ()
-		 io.emit("newMessage", generateMessage(message.from, message.text));
+		 io.emit("newMessage", generateMessage(message.from, message.text, message.createdAt));
 
 		//SI ON VOULAIT QUE LE MESSAGE SOIT QU AUX AUTRES.
 		//socket.broadcast.emit("newMessage", generateMessage(message.from, message.text));
