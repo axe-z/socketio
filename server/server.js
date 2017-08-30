@@ -3,7 +3,7 @@ const path = require('path');
 const http = require('http');
 const socketIO = require('socket.io');
 const moment = require('moment');
-const { generateMessage, generateLocationMessage/*, generateLocationPre*/ } = require('./utils/message');
+const { generateMessage, generateLocationMessage /*, generateLocationPre*/ } = require('./utils/message');
 const port = process.env.PORT || 3000;
 const publicPath = path.join(__dirname, '../public/');
 const app = express();
@@ -11,7 +11,7 @@ const server = http.createServer( app )  //est comme app.listen
 
 const io = socketIO(server)
 
-app.use(express.static(publicPath)); //public, index.html
+app.use(express.static(publicPath)); //public, index.html / chat.html
 
 
 
@@ -43,7 +43,7 @@ io.on("connection", socket => {
 		 io.emit("newMessage", generateMessage(message.from, message.text, message.createdAt));
 
 		//SI ON VOULAIT QUE LE MESSAGE SOIT QU AUX AUTRES.
-		//socket.broadcast.emit("newMessage", generateMessage(message.from, message.text));
+		//socket.broadcast.emit("newMessage", generateMessage(message.from, message.text, message.createdAt));
 
   callback('- Serveur') //parfait, recu!
 

@@ -2,6 +2,29 @@
 moment.locale('fr-ca');  //moment(obj.createdAt).format('H:mm a'); plus bas,ne pas oublier format,sinon ENGLISH
 const socket = io();
 
+/************************************ scrollToBotton ************************************/
+function scrollToBotton(){
+  //selecteur
+  const messages = document.querySelector("#messages"); //fenetre des messages
+  const nouveauMessage = $(messages).children('li:last-child') //pour trouver le dernier message.
+
+  //hauteurs // j dois utiliser du jquery .
+  const clientHeight = $(messages).prop('clientHeight');
+  const scrollTop = $(messages).prop('scrollTop');
+  const scrollHeight = $(messages).prop('scrollHeight');
+
+  const nouveauMessageHeight = nouveauMessage.innerHeight();
+  const AvantDernierMessageHeight =  nouveauMessage.prev().innerHeight(); // avant dernier message
+
+  //ICI SI L UTILISATEUR REMONTE, LA FUNCTION NE SCROLLERA PAS , SI ON VEUT LIRE DES TRUC ECRIS AVANT , CA FUCKERA PAS CA.  SI L UTILISATEUR REVIENT EN BAS, L ACTIVATION VA REPRENDRE SEULEMENT SI LA POSITION EST ENTRE L AVANT DERNIER ET LE DERNIER ET PLUS
+  if(clientHeight + scrollTop  + nouveauMessageHeight  +  AvantDernierMessageHeight  >= scrollHeight) {
+  //$(messages).scrollTop(scrollHeight)
+   //POUR ANIMER
+    $(messages).animate({scrollTop: scrollHeight}, 600)
+  }
+}
+/************************************ scrollToBotton ************************************/
+
 
  socket.on('connect', function (){
     console.log('index logguer');
@@ -40,6 +63,7 @@ socket.on("newMessage", function(message) {
 
  document.querySelector("#messages").insertAdjacentHTML('beforeend', html)  // Solution JS
  //marche avec Jquery // $("#messages").append(html)
+ scrollToBotton();
 });
 
 
@@ -80,6 +104,7 @@ socket.on("newLocationMessage", function(obj) {
   })
   document.querySelector("#messages").insertAdjacentHTML('beforeend', html)  // Solution JS
   //marche avec Jquery // $("#messages").append(html)
+  scrollToBotton();
 }); /*socket.on("newLocationMessage"*/
 
 
@@ -131,5 +156,3 @@ locationButton.addEventListener("click", function() {
 			alert("impossible d'aficher votre position, si vous n'accepter pas la posibilité");
 		});
 });  //click
-
- 

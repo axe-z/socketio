@@ -2,75 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Socket IO</title>
+  <title>Versenger- Accueil</title>
   <link rel="stylesheet" href="./css/styles.css">
 
 </head>
-<body class="chat">
-  <!-- <h2>Verdons Messenger</h2> -->
-<div class="chat__sidebar">
-  <!-- <h3>Nos Verdons</h3> -->
-  <img src="./css/messenger.svg" alt="logo" class="logo">
-  <div id="users">Utilisateurs En Ligne</div>
-  <div id="game">Prochaine Partie
-    <p>16 Aout 2017</p>
-    <p>19h parc Préfontaine</p>
-    <p>Verdons VS Coyottes</p>
-    <br>
-    <button type="button" name="button" class="side_button"> Votre Trajet </button>
-        <br>  <br>
-    <button type="button" name="button" class="side_button"> Previsions Meteo </button>
+<body class="centered-form">
+  <div class="centered-form__form">
+    <form action="/chat.html"> <!--va rediriger /chat.html?name=&room= avec les name attr -->
+      <div class="form-field">
+        <h3 class="titre">VERSENGER<h3>
+      </div>
+      <div class="form-field">
+        <label>Nom</label>
+        <input type="text" name="nom" autofocus/>
+      </div>
+      <div class="form-field">
+        <label>Chambre</label>
+        <input type="text" name="chambre" placeholder="Versenger"/>
+      </div>
+      <div class="form-field">
+        <button class="joindre">Joindre</button>
+      </div>
+    </form>
   </div>
-  <p id="patience"></p>
-</div>
 
-<div class="chat__main">
-  <ol id="messages" class="chat__messages"> </ol>
 
-<div class="chat__footer">
-  <form id="message-form">
-    <input type="text" name="message" placeholder="Votre message..." autofocus autocomplete="off"/>
-    <button type="submit"  >Envoyer</button>
-  </form>
-  <button id="send-location" >Envoyer Position</button>
-</div>
-</div>
-
-<script id="message-template" type="text/template">
-<li class="message">
-  <div class="message__title">
-    <h4>{{from}}</h4><span>{{createdAt}}</span></div>
-  <div class="message__body">
-    <p>{{text}}</p>
-  </div>
-</li>
-</script>
-
-<script id="location-message-template" type="text/template">
-  <li class="message">
-    <div class="message__title">
-      <h4>{{from}}</h4><span>{{createdAt}}</span>
-    </div>
-    <div class="message__body">
-      <p>
-        <a href="{{url}}" target="_blank">Voir ma position Actuelle</a>
-      </p>
-    </div>
-  </li>
-</script>
-
-  <script src="/socket.io/socket.io.js"></script>
+  <!-- <script src="/socket.io/socket.io.js"></script>
 
   <script src="/js/libs/jquery.js"></script>
   <script src="/js/libs/moment-with-locales.js"></script>
-  <script src="/js/libs/mustache.min.js"></script>
+  <script src="/js/libs/mustache.min.js"></script> -->
 
   <!--nofifications-->
   <script src="/js/libs/notification.js"></script>
     <!--nofifications-->
-  <script src="/js/index.js"></script>
+  <!-- <script src="/js/chat.js"></script> -->
 
 </body>
 </html>
