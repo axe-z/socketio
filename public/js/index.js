@@ -11,29 +11,45 @@ const socket = io();
   console.log('connection perdue');
  });
 
-//recevoir du serveur: R
+//recevoir du serveur SANS MUSTACHE: R
 /************R***************  message princ de io.emit("newMessage" *******************************/
 //recoit du serveur l object 'newMessage' , en CB peut faire de quoi avec.
+// socket.on("newMessage", function(message) {
+// 	console.log("Nouveau Message:", message.text);
+// 	//va dans la console va displayer   socket.emit('newMessage' et socket.broadcast.emit('newMessage' de server
+//
+//    //notifyMe(message.text);
+//
+// 	let li = document.createElement("li");
+//   let span = document.createElement("span") ;
+//   li.className = 'text';
+//   span.className = 'moment';
+// 	li.innerHTML = `${message.from}: ${message.text}`;
+//   span.innerHTML = ` ${message.createdAt}`;
+// 	document.querySelector("#messages").appendChild(li).appendChild(span);
+// });
+
+///AVEC Mustache
 socket.on("newMessage", function(message) {
-	console.log("Nouveau Message:", message.text);
-	//va dans la console va displayer   socket.emit('newMessage' et socket.broadcast.emit('newMessage' de server
+ const template = document.getElementById('message-template').innerText
+ let html = Mustache.render(template, {
+   text: message.text,
+   from: message.from,
+   createdAt: message.createdAt
+ })  //ce qui est dans le template {{}}.
 
-   //notifyMe(message.text);
-
-	let li = document.createElement("li");
-  let span = document.createElement("span") ;
-  li.className = 'text';
-  span.className = 'moment';
-	li.innerHTML = `${message.from}: ${message.text}`;
-  span.innerHTML = ` ${message.createdAt}`;
-	document.querySelector("#messages").appendChild(li).appendChild(span);
+ document.querySelector("#messages").insertAdjacentHTML('beforeend', html)  // Solution JS
+ //marche avec Jquery // $("#messages").append(html)
 });
+
 
 
 /*************R***************** lien de location io.emit('newLocationMessage'****************************/
 //ici au lieu d utiliser moment par le back-end, juste pour test, j vais utiliser la version f-e.
 //truc qui revient de generateLocationMessage
-socket.on("newLocationMessage", function(obj) {
+
+//Sans Mustache:
+/*socket.on("newLocationMessage", function(obj) {
 
   const formatedTime = moment(obj.createdAt).format('H:mma');
 	console.log("Message de localisation:", obj.url);
@@ -49,8 +65,22 @@ socket.on("newLocationMessage", function(obj) {
   lien.innerHTML = ` Voir ma position  - ${formatedTime}`;
 	document.querySelector("#messages").appendChild(li).appendChild(lien);
 
-}); /*socket.on("newLocationMessage"*/
+}); /*socket.on("newLocationMessage"
+*/
 
+//Avec Mustache:
+socket.on("newLocationMessage", function(obj) {
+
+  const formatedTime = moment(obj.createdAt).format('H:mma');
+  const template = document.getElementById('location-message-template').innerText;
+  let html = Mustache.render(template, {
+    from: obj.from,
+    url: obj.url,
+    createdAt: formatedTime
+  })
+  document.querySelector("#messages").insertAdjacentHTML('beforeend', html)  // Solution JS
+  //marche avec Jquery // $("#messages").append(html)
+}); /*socket.on("newLocationMessage"*/
 
 
 
@@ -102,23 +132,4 @@ locationButton.addEventListener("click", function() {
 		});
 });  //click
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// socket.emit('createMessage',{
-//   from: 'moi',
-//   text: 'alllllo'
-// }, function (){
-//  console.log('recu lllala')
-// });
+ 
