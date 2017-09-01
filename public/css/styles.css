@@ -18,7 +18,7 @@ button, button:hover {
   color: rgb(153, 153, 153);
   position: absolute;
   bottom: 20px;
-  font-size: 12.5px;
+  font-size: 14px;
   margin-left: 10px;
 }
 #users {
@@ -121,7 +121,7 @@ button:disabled {
 }
 
 .joindre {
-  margin-top: 10px;
+  margin-top: 13px;
 }
 
 .centered-form {
@@ -140,9 +140,9 @@ button:disabled {
 /*menu intro*/
 .centered-form__form {
   background-color: rgba(51, 51, 51, 0.9);
-  border: 1px solid rgb(26, 26, 26);
+  /*border: 1px solid rgb(26, 26, 26);*/
   border-radius: 10px;
-  box-shadow: 1px 0px 60px rgba(51, 51, 51, 0.1);
+  box-shadow: 0px 0px 10px rgba(51, 51, 51, 0.1);
    color:rgb(198, 198, 198) ;
   padding: 0 20px;
   margin: 20px;
@@ -154,11 +154,13 @@ button:disabled {
 
 .centered-form__form:hover {
     width: 290px;
-    box-shadow: 1px 0px 120px rgba(51, 51, 51, 0.9);
+    border: none;
+    box-shadow: 1px 0px 120px rgba(28, 28, 28, 0.9);
 }
 .titre {
   letter-spacing: 3px;
   font-weight: 100;
+  font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande";
   transition: all 0.55s ease-in-out;
   -webkit-transition: all 0.55s ease-in-out;
 }
@@ -176,6 +178,10 @@ input[type="text"] {
     outline-style: none;
     color:rgb(198, 198, 198) ;
 }
+#mess {
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
 
 .form-field {
   margin: 20px 0;
@@ -189,9 +195,20 @@ input[type="text"] {
   display: block;
   margin-bottom: 7px
 }
+/*input:-webkit-autofill {
+      background-color: rgb(106, 106, 106)!important;
+}*/
+/*input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px rgba(51, 51, 51, 1) inset;
+
+    transition: all 0.35s ease-in-out;
+    -webkit-transition: all 0.35s ease-in-out;
+}*/
+
+
 
 .form-field input, .form-field select {
-  border: 1px solid rgb(142, 142, 142);
+  border: 0.3px solid  rgba(143, 143, 143, 0.32);
   padding: 10px;
   border-radius: 5px;
 }
@@ -289,6 +306,13 @@ a {
 
 .message__title span {
   color: #999
+}
+
+#users ol li {
+  background-color: rgb(59, 58, 58);
+  border: none;
+  list-style: none;
+
 }
 
 @media (max-width:600px) {

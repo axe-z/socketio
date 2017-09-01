@@ -17,6 +17,7 @@ function scrollToBotton(){
   const AvantDernierMessageHeight =  nouveauMessage.prev().innerHeight(); // avant dernier message
 
   //ICI SI L UTILISATEUR REMONTE, LA FUNCTION NE SCROLLERA PAS , SI ON VEUT LIRE DES TRUC ECRIS AVANT , CA FUCKERA PAS CA.  SI L UTILISATEUR REVIENT EN BAS, L ACTIVATION VA REPRENDRE SEULEMENT SI LA POSITION EST ENTRE L AVANT DERNIER ET LE DERNIER ET PLUS
+
   if(clientHeight + scrollTop  + nouveauMessageHeight  +  AvantDernierMessageHeight  >= scrollHeight) {
   //$(messages).scrollTop(scrollHeight)
    //POUR ANIMER
@@ -27,11 +28,31 @@ function scrollToBotton(){
 
 
  socket.on('connect', function (){
-    console.log('index logguer');
+    //console.log('index logguer');
+    const params = $.deparam(window.location.search); // va retourner l oject avec nom et chambre.
+    //on va envoyer ca au serveur,
+    socket.emit('join', params , function (err){     //fn d 'acknowledgement'
+      if (err) {
+        alert(err)
+        window.location.href = '/';         //on les repitch au debut te toé
+      } else {
+        console.log('pas d\'erreur');
+      }
+    });
  });
 
  socket.on('disconnect',function (){
   console.log('connection perdue');
+ });
+
+//utilise getUserList qui retourne seulement un array des noms.
+ socket.on('updateUserList', function (users) {
+   console.log('liste des user', users)
+   let ol = $("<ol>");
+   users.forEach(function (user){
+    ol.append($('<li>').text(user))
+  });
+  $('#users').html(ol)  //pas append sinon on ajoute toujours a ce qui y est..
  });
 
 //recevoir du serveur SANS MUSTACHE: R

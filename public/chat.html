@@ -13,8 +13,8 @@
 <div class="chat__sidebar">
   <!-- <h3>Nos Verdons</h3> -->
   <img src="./css/messenger.svg" alt="logo" class="logo">
-  <div id="users">Utilisateurs En Ligne</div>
-  <div id="game">Prochaine Partie
+  <div id="users"></div>
+  <!-- <div id="game">Prochaine Partie
     <p>16 Aout 2017</p>
     <p>19h parc Préfontaine</p>
     <p>Verdons VS Coyottes</p>
@@ -22,7 +22,7 @@
     <button type="button" name="button" class="side_button"> Votre Trajet </button>
         <br>  <br>
     <button type="button" name="button" class="side_button"> Previsions Meteo </button>
-  </div>
+  </div> -->
   <p id="patience"></p>
 </div>
 
@@ -31,7 +31,7 @@
 
 <div class="chat__footer">
   <form id="message-form">
-    <input type="text" name="message" placeholder="Votre message..." autofocus autocomplete="off"/>
+    <input type="text" id="mess" name="message" placeholder="Votre message..." autofocus autocomplete="off"/>
     <button type="submit"  >Envoyer</button>
   </form>
   <button id="send-location" >Envoyer Position</button>
@@ -66,7 +66,7 @@
   <script src="/js/libs/jquery.js"></script>
   <script src="/js/libs/moment-with-locales.js"></script>
   <script src="/js/libs/mustache.min.js"></script>
-
+  <script src="/js/libs/deparam.js"></script>
   <!--nofifications-->
   <script src="/js/libs/notification.js"></script>
     <!--nofifications-->

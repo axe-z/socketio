@@ -7,7 +7,7 @@ describe("Test de generateMessage", () => {
     const text = 'allo le test';
     const message = generateMessage(from, text)
 
-     expect(message.createdAt).toBeA('number'); //fucking lowercase.
+     expect(message.createdAt).toBeA('string'); //fucking lowercase.
      expect(message).toBeA('object');   //fucking lowercase.
      expect(message.from).toBe('ben');
   });
