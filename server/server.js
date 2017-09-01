@@ -70,11 +70,18 @@ io.on("connection", socket => {
 /************************************ accepte createMessage ************************************/
 //FN QUI INTERCEPT LES SOCKET.EMIT('CREATEMESSAGE' QUI VIENNENT DU CLIENT.
  socket.on("createMessage", (message, callback) => {
-		//OPERATION SERVEUR QUAND LE CLIENT EMIT UN NEWMESAGE DANS CE CAS
-		console.log(`createMessage: ${message.from}`, message.text); //envoi au terminal server.
 
-		// pas un CB , on veut le retour, donc ()
-		 io.emit("newMessage", generateMessage(message.from, message.text, message.createdAt));
+  const user = users.getUser(socket.id); // va retourner qu un user.
+
+  // verifier si user existe ... et verifier si ok message ,
+	if(user && isRealString(message.text)){
+
+ //on veut que les message soit juste dans la chambre du user//on pitch le nom du user au lieu de message.fr
+		 io.to(user.chambre).emit("newMessage", generateMessage(user.nom, message.text, message.createdAt));
+	}
+
+		//OPERATION SERVEUR QUAND LE CLIENT EMIT UN NEWMESAGE DANS CE CAS
+		//console.log(`createMessage: ${message.from}`, message.text); //envoi au terminal server.
 
 		//SI ON VOULAIT QUE LE MESSAGE SOIT QU AUX AUTRES.
 		//socket.broadcast.emit("newMessage", generateMessage(message.from, message.text, message.createdAt));
@@ -88,7 +95,13 @@ io.on("connection", socket => {
 /************************************ renvoie url ************************************/
 	//recoit lat lng renvoie from, url, createdAt
 	socket.on('createLocationMessage', (coords) => {
- 		io.emit('newLocationMessage', generateLocationMessage('admin', coords.latitude, coords.longitude));
+		const user = users.getUser(socket.id); // va retourner qu un user.
+		if(user){
+
+	 //on veut que les message soit juste dans la chambre du user//on pitch le nom du user au lieu d'Admin'
+			 io.to(user.chambre).emit("newLocationMessage", generateLocationMessage(user.nom, coords.latitude, coords.longitude));
+		}
+ 		//io.emit('newLocationMessage', generateLocationMessage('admin', coords.latitude, coords.longitude));
 	});
 
 
@@ -101,10 +114,10 @@ io.on("connection", socket => {
 	socket.on("disconnect", () => {
 		//SI ON CHANGE DE PAGE... ou refresh//VERS SERVER
 		//console.log("connection perdue");
-		const user = users.removeUser(socket.id)  //retourne le user
+		const user = users.removeUser(socket.id);  //retourne le user
 		if(user){
-			io.to(user.chambre).emit('updateUserList', users.getUserList(user.chambre)) //enleve de la liste
-			io.to(user.chambre).emit('newMessage', generateMessage('Admin', `${user.nom} a quitté`))
+			io.to(user.chambre).emit('updateUserList', users.getUserList(user.chambre)); //enleve de la liste
+			io.to(user.chambre).emit('newMessage', generateMessage('Admin', `${user.nom} a quitté`));
 		}
 	});
 }); //io.on fin
